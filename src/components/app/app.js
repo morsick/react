@@ -9,15 +9,22 @@ import '../search-panel/search-panel.css'
 import './app.css';
 
 function App() {
+
+	const data = [
+		{ name: 'Ilia', salary: 1555, increase: false },
+		{ name: 'Kate', salary: 600, increase: false },
+		{ name: 'Biba', salary: 15000, increase: true },
+	];
+
 	return (
 		<div className="app">
-			<AppInfo/>
+			<AppInfo />
 			<div className="search-panel">
-				<SeachPanel/>
-				<AppFilter/>
+				<SeachPanel />
+				<AppFilter />
 			</div>
-			<EmployeesList/>
-			<EmployeesAddForm/>
+			<EmployeesList data={data}/>
+			<EmployeesAddForm />
 		</div>
 	);
 }
