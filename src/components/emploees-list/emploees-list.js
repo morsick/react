@@ -2,15 +2,15 @@ import EmployeesListItem from "../emploees-list-item/emploees-list-item";
 
 import './employees-list.css';
 
-const EmployeesList = ({data}) => {
-	
+const EmployeesList = ({ data, dellItem }) => {
 	const elements = data.map(item => {
-		const {id, ...itemProps} = item; 
-		return <EmployeesListItem key={id} {...itemProps}/>
+		const { id, ...itemProps } = item;
+		return <EmployeesListItem key={id}
+			{...itemProps}
+			dellItem={() => dellItem(id)} />
 	});
 
-	elements.sort((a, b) => 
-	{
+	elements.sort((a, b) => {
 		return a.props.salary - b.props.salary
 	})
 
