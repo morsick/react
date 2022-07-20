@@ -5,8 +5,8 @@ import nextId from "react-id-generator";
 import AppInfo from '../app-info/app-info';
 import SeachPanel from '../search-panel/search-panel';
 import AppFilter from '../app-filter/app-filter'
-import EmployeesList from '../emploees-list/emploees-list'
-import EmployeesAddForm from '../emploees-add-form/employees-add-form';
+import EmployeesList from '../employees-list/employees-list'
+import EmployeesAddForm from '../employees-add-form/employees-add-form';
 
 import '../search-panel/search-panel.css'
 import './app.css';
