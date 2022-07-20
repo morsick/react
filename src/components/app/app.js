@@ -20,7 +20,9 @@ class App extends Component {
 				{ name: 'Ilia', salary: 1555, increase: false, liked: false, id: nextId() },
 				{ name: 'Kate', salary: 600, increase: false, liked: false, id: nextId() },
 				{ name: 'Biba', salary: 15000, increase: false, liked: false, id: nextId() },
-			]
+			],
+			term: "",
+			filterName: ""
 		};
 	}
 
@@ -76,15 +78,49 @@ class App extends Component {
 		});
 	}
 
+	filterData = (data) => {
+		return data.filter((item => {
+			return item.name.indexOf(this.state.term) > -1;
+		})).filter(this.getFilterCollbackByFilterName());
+	}
+
+	getFilterCollbackByFilterName = () => {
+		const { filterName } = this.state;
+		switch (filterName) {
+			case "all":
+				return () => true;
+			case "increase":
+				return item => item.increase;
+			case "salary":
+				return item => item.salary > 1000;
+			default:
+				return () => true;
+		}
+	}
+
+	onSearchPanelChange = (value) => {
+		this.setState(() => {
+			return { term: value };
+		});
+	}
+
+	onSearchFilterChange = (value) => {
+		this.setState(() => {
+			return { filterName: value };
+		});
+	}
+
 	render() {
+		const { data } = this.state;
+		const filterData = this.filterData(data);
 		return (
 			<div className="app" >
-				<AppInfo data={this.state.data} />
+				<AppInfo data={filterData} />
 				<div className="search-panel">
-					<SeachPanel />
-					<AppFilter />
+					<SeachPanel onSearchPanelChange={this.onSearchPanelChange} />
+					<AppFilter onSearchFilterChange={this.onSearchFilterChange} />
 				</div>
-				<EmployeesList data={this.state.data}
+				<EmployeesList data={filterData}
 					dellItem={this.dellItem}
 					handleChangeIncreace={this.handleChangeIncreace}
 					handleChangeLike={this.handleChangeLike} />
