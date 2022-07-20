@@ -2,12 +2,14 @@ import EmployeesListItem from "../emploees-list-item/emploees-list-item";
 
 import './employees-list.css';
 
-const EmployeesList = ({ data, dellItem }) => {
+const EmployeesList = ({ data, dellItem, handleChangeIncreace, handleChangeLike }) => {
 	const elements = data.map(item => {
 		const { id, ...itemProps } = item;
 		return <EmployeesListItem key={id}
 			{...itemProps}
-			dellItem={() => dellItem(id)} />
+			dellItem={() => dellItem(id)}
+			handleChangeIncreace={() => { handleChangeIncreace(id) }}
+			handleChangeLike={() => { handleChangeLike(id) }} />
 	});
 
 	elements.sort((a, b) => {

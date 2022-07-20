@@ -17,15 +17,15 @@ class App extends Component {
 
 		this.state = {
 			data: [
-				{ name: 'Ilia', salary: 1555, increase: false, id: nextId() },
-				{ name: 'Kate', salary: 600, increase: false, id: nextId() },
-				{ name: 'Biba', salary: 15000, increase: true, id: nextId() },
+				{ name: 'Ilia', salary: 1555, increase: false, liked: false, id: nextId() },
+				{ name: 'Kate', salary: 600, increase: false, liked: false, id: nextId() },
+				{ name: 'Biba', salary: 15000, increase: false, liked: false, id: nextId() },
 			]
 		};
 	}
 
 	dellItem = (id) => {
-		this.setState(({data}) => {
+		this.setState(({ data }) => {
 			const newData = data.filter(userInfo => userInfo.id !== id);
 			return {
 				data: newData,
@@ -34,13 +34,42 @@ class App extends Component {
 	}
 
 	addItem = (item) => {
-		if (item.name === '' || item.salary === '')
-		{
+		if (item.name === '' || item.salary === '') {
 			return;
 		}
 
-		this.setState(({data}) => {
+		this.setState(({ data }) => {
 			const newData = [...data, item];
+			return {
+				data: newData,
+			}
+		});
+	}
+
+	handleChangeIncreace = (id) => {
+		this.setState(({ data }) => {
+			const newData = data.map(item => {
+				if (item.id === id) {
+					return { ...item, increase: !item.increase }
+				}
+				return item;
+			});
+
+			return {
+				data: newData,
+			}
+		});
+	}
+
+	handleChangeLike = (id) => {
+		this.setState(({ data }) => {
+			const newData = data.map(item => {
+				if (item.id === id) {
+					return { ...item, liked: !item.liked }
+				}
+				return item;
+			});
+
 			return {
 				data: newData,
 			}
@@ -50,13 +79,16 @@ class App extends Component {
 	render() {
 		return (
 			<div className="app" >
-				<AppInfo />
+				<AppInfo data={this.state.data} />
 				<div className="search-panel">
 					<SeachPanel />
 					<AppFilter />
 				</div>
-				<EmployeesList data={this.state.data} dellItem={this.dellItem} />
-				<EmployeesAddForm addItem={this.addItem}/>
+				<EmployeesList data={this.state.data}
+					dellItem={this.dellItem}
+					handleChangeIncreace={this.handleChangeIncreace}
+					handleChangeLike={this.handleChangeLike} />
+				<EmployeesAddForm addItem={this.addItem} />
 			</div>
 		);
 	}
