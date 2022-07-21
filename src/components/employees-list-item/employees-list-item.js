@@ -4,7 +4,6 @@ const EmployeesListItem = (props) => {
 	const { name, salary, liked, increase, dellItem, handleChangeIncreace, handleChangeLike } = props;
 	const className = `list-group-item d-flex justify-content-between ${increase ? "increase" : ""} ${liked ? "like" : ""}`;
 
-
 	return (
 		<li className={className} >
 			<span className="list-group-item-label" onClick={handleChangeLike}>{name}</span>
