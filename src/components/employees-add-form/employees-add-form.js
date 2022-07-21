@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './employees-add-form.css';
+import './employees-add-form.scss';
 import nextId from "react-id-generator";
 
 class EmployeesAddForm extends Component {
